@@ -12,4 +12,4 @@ class Continent:
                 owners.append(territory.owner)
         if len(owners) > 1:
             return False
-        return True
+        return owners[0]

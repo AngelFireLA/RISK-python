@@ -10,6 +10,7 @@ class Player:
         self.color = color
         self.cards = []
         self.game: Game = None
+        self.remaining_troops = 0
 
     def get_total_troop_count(self):
         total_troop_count = 0
@@ -89,3 +90,15 @@ class Player:
                     return True
 
         return False
+
+    def get_attackable_territories(self, chosen_territory=None):
+        attackable_territories = []
+        if not chosen_territory:
+            for territory in self.territories:
+                for connected_territory in territory.connected_territories:
+                    if connected_territory.owner != self:
+                        attackable_territories.append(connected_territory)
+        else:
+            if chosen_territory.owner != self:
+                print("chosen territory is not owned by player")
+        return attackable_territories
